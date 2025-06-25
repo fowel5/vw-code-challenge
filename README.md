@@ -1,69 +1,30 @@
-# React + TypeScript + Vite
+# Code Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a project for a code challenge for the company VW. It was scaffolded using `npm create vite@latest` and following best practices.
 
-Currently, two official plugins are available:
+## Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React: It was the required library.
+- Vite: I wanted to use a fast bundler with hot module replacement and create a blank react app (I would have evaluated create-react-app if it was not deprecated).
+- TailwindCSS: I do like more CSSinJS libraries like styled-components, but with no SSR I have already experienced problems with layout shifts and delayed loads. I think Tailwind is pretty efficient and lightweight, that is the reason I chose it for.
+- Vitest: If I use Vite, I will of course use Vitest and not Jest (which I could have done).
+- Eslint & Prettier: I chose Eslint just because I am more familiar with it, which the pre config from Vite and few rules, that I prefer. I also added prettier with few preferences of mine.
+- Github Actions: Since we are here on Github, I prefer to keep it simple with Github Actions (having it easy, to potentially deploy it to a Github Page) and not complicate my life with Jenkins (I have somehow bad memorias with Jenkins in the University).
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+In order to run this project you will need `node >= 22.12.0` and `npm >= 6.14.16`. You just have to clone the project, go to the folder 'vw-code-challenge' and execute `npm i`. Then just `npm run dev`.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Branches
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+I am using a GitFlow approach, where I have my develop branch named "dev" and from there, I create other branches to fullfil a task. After being done I create a pull-request, review it and merge it back into dev. As soon as I see a version worth showing, I will push the dev state into main.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+TODO: Create github action after push on main, which triggers a deployment on Github Pages.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Also I use conventional commits and conventional branches to have better structured namings.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Problems
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+I will list here the problems I have been facing since starting this project.
+
+- Tailwind Version: Somehow the latest Tailwind version was not compatible with the version I was trying to use from Vite+React. I had the luck, that it was already in work and some tailwind contributor purposed a solution on https://github.com/tailwindlabs/tailwindcss/issues/18381#issuecomment-3001151427.
