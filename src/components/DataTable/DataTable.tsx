@@ -1,11 +1,18 @@
-import { useState } from 'react';
-import { data } from '../../utils/mockData';
+import { useEffect, useState } from 'react';
 import { searchStudent } from '../../utils/filters';
+import type { Student } from '../../types/Student';
 
 export default function DataTable() {
   const [search, setSearch] = useState('');
+  const [students, setStudents] = useState<Student[]>([]);
 
-  const filteredData = searchStudent(data, search);
+  useEffect(() => {
+    fetch('http://localhost:3000/students')
+      .then((res) => res.json())
+      .then((students) => setStudents(students));
+  }, []);
+
+  const filteredData = searchStudent(students, search);
 
   return (
     <div className='p-6 max-w-full'>
