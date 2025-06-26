@@ -1,0 +1,74 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "firstName": "Sadella",
+      "lastName": "Kelle",
+      "email": "skelle0@mediafire.com",
+      "note": 2.2
+    },
+    {
+      "id": 2,
+      "firstName": "Dallas",
+      "lastName": "McGaughie",
+      "email": "dmcgaughie1@furl.net",
+      "note": 6.3
+    },
+    {
+      "id": 3,
+      "firstName": "Vida",
+      "lastName": "Plewes",
+      "email": "vplewes2@infoseek.co.jp",
+      "note": 1.0
+    },
+    {
+      "id": 4,
+      "firstName": "Liane",
+      "lastName": "Alf",
+      "email": "lalf3@state.tx.us",
+      "note": 9.1
+    },
+    {
+      "id": 5,
+      "firstName": "Adler",
+      "lastName": "Cardenas",
+      "email": "acardenas4@imageshack.us",
+      "note": 0.5
+    },
+    {
+      "id": 6,
+      "firstName": "Hermione",
+      "lastName": "Tudball",
+      "email": "htudball5@pagesperso-orange.fr",
+      "note": 0.1
+    },
+    {
+      "id": 7,
+      "firstName": "Meryl",
+      "lastName": "Wigfield",
+      "email": "mwigfield6@omniture.com",
+      "note": 0.2
+    },
+    {
+      "id": 8,
+      "firstName": "Bee",
+      "lastName": "Matelyunas",
+      "email": "bmatelyunas7@globo.com",
+      "note": 7.5
+    },
+    {
+      "id": 9,
+      "firstName": "Felice",
+      "lastName": "Boswood",
+      "email": "fboswood8@github.com",
+      "note": 9.4
+    },
+    {
+      "id": 10,
+      "firstName": "Belicia",
+      "lastName": "Mileham",
+      "email": "bmileham9@miibeian.gov.cn",
+      "note": 5.4
+    }
+  ]
+}
