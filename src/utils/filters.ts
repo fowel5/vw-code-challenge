@@ -1,4 +1,4 @@
-import type { Student } from './mockData';
+import type { Student } from '../types/Student';
 
 export function searchStudent(
   data: Student[],
