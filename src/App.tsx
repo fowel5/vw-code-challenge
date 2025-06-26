@@ -1,5 +1,7 @@
+import DataTable from './components/DataTable/DataTable';
+
 function App() {
-  return <h1>Hello World</h1>;
+  return <DataTable />;
 }
 
 export default App;
