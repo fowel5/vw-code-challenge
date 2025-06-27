@@ -34,7 +34,7 @@ describe('BeautifulTable', () => {
     expect(await screen.findByText('First Name')).toBeInTheDocument();
     expect(await screen.findByText('Last Name')).toBeInTheDocument();
     expect(await screen.findByText('Email')).toBeInTheDocument();
-    expect(await screen.findByText('mark')).toBeInTheDocument();
+    expect(await screen.findByText('Mark')).toBeInTheDocument();
   });
 
   it('renders all students initially', async () => {
