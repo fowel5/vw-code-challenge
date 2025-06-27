@@ -1,7 +1,19 @@
 import { useParams } from 'react-router';
+import { useStudents } from '../../hooks/useStudents';
 
 export default function StudentShowCase() {
-  const params = useParams();
+  const { id } = useParams();
+  const studentIdToSearch = parseInt(id || '0');
+  const studentContext = useStudents();
 
-  return <h1>{params['id']}</h1>;
+  if (studentContext === undefined) {
+    return undefined;
+  }
+
+  const { students } = studentContext;
+  const studentToShow = students.find(
+    (student) => student.id == studentIdToSearch
+  );
+
+  return <div>{JSON.stringify(studentToShow)}</div>;
 }

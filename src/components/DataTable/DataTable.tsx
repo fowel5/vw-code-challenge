@@ -1,17 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { searchStudent } from '../../utils/filters';
-import type { Student } from '../../types/Student';
+import { useStudents } from '../../hooks/useStudents';
 
 export default function DataTable() {
   const [search, setSearch] = useState('');
-  const [students, setStudents] = useState<Student[]>([]);
+  const studentsContext = useStudents();
 
-  useEffect(() => {
-    fetch('http://localhost:3000/students')
-      .then((res) => res.json())
-      .then((students) => setStudents(students));
-  }, []);
+  if (studentsContext === undefined) {
+    return;
+  }
 
+  const { students } = studentsContext;
   const filteredData = searchStudent(students, search);
 
   return (
