@@ -7,6 +7,7 @@ import DataTable from './components/DataTable/DataTable';
 import StudentShowCase from './components/StudentShowcase/StudentShowcase';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Error from './components/Error/Error';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path='/' element={<DataTable />} />
           <Route path='/student/:id' element={<StudentShowCase />} />
+          <Route path='/error' element={<Error />} />
         </Routes>
       </BrowserRouter>
     </StudentsProvider>
