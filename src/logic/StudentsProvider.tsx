@@ -6,6 +6,7 @@ import {
   type ReactNode,
 } from 'react';
 import type { Student } from '../types/Student';
+import { fetchStudents } from '../api/studentsApi';
 
 type StudentsProviderProps = {
   children?: ReactNode;
@@ -24,15 +25,18 @@ export const StudentsProvider = ({
   children,
 }: StudentsProviderProps): JSX.Element => {
   const [students, setStudents] = useState<Student[]>([]);
+  const [isRequestFailed, setIsRequestFailed] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:3000/students')
-      .then((res) => res.json())
-      .then((students) => setStudents(students));
+    fetchStudents()
+      .then((students) => setStudents(students))
+      .catch(() => setIsRequestFailed(true));
   }, []);
 
   return (
-    <StudentContext.Provider value={{ students, setStudents }}>
+    <StudentContext.Provider
+      value={isRequestFailed ? undefined : { students, setStudents }}
+    >
       {children}
     </StudentContext.Provider>
   );
