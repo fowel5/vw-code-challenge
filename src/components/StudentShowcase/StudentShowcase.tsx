@@ -17,7 +17,7 @@ export default function StudentShowCase() {
   }
 
   return (
-    <div className='p-6 max-w-auto'>
+    <div className='p-6 max-w-auto h-[80vh]'>
       <h2 className='text-2xl font-bold mb-4 text-center'>Student Details</h2>
       <div className='flex justify-center'>
         <div className='overflow-x-auto rounded-2xl shadow-md w-full max-w-lg'>

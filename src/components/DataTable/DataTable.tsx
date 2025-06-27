@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { searchStudent } from '../../utils/filters';
 import { useStudents } from '../../hooks/useStudents';
+import { useNavigate } from 'react-router';
 
 export default function DataTable() {
   const [search, setSearch] = useState('');
   const studentsContext = useStudents();
+  const navigate = useNavigate();
 
   if (studentsContext === undefined) {
     return;
@@ -14,10 +16,8 @@ export default function DataTable() {
   const filteredData = searchStudent(students, search);
 
   return (
-    <div className='p-6 max-w-full'>
-      <h1 className='text-2xl font-bold mb-4 text-center'>
-        Student Management
-      </h1>
+    <div className='p-6 max-w-full h-[80vh]'>
+      <h1 className='text-2xl font-bold mb-4 text-center'>Students Overview</h1>
       <input
         type='text'
         placeholder='Search users...'
@@ -25,7 +25,7 @@ export default function DataTable() {
         onChange={(e) => setSearch(e.target.value)}
         className='mb-4 w-full max-w-md mx-auto block px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
       />
-      <div className='overflow-x-auto overflow-y-scroll max-h-[80vh] rounded-2xl shadow-md'>
+      <div className='overflow-x-auto overflow-y-scroll rounded-2xl shadow-md'>
         <table className='min-w-full w-auto divide-gray-200'>
           <thead className='bg-gray-100 sticky top-0'>
             <tr>
@@ -51,6 +51,9 @@ export default function DataTable() {
               <tr
                 key={student.id}
                 className='hover:bg-gray-50 transition-colors duration-200'
+                onClick={() => {
+                  navigate(`/student/${student.id}`);
+                }}
               >
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
                   {student.id}

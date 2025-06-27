@@ -1,6 +1,12 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import DataTable from './DataTable';
 
+vi.mock('react-router', async () => {
+  return {
+    useNavigate: () => vi.fn(),
+  };
+});
+
 vi.mock('../../hooks/useStudents', () => ({
   useStudents: () => ({
     students: [
