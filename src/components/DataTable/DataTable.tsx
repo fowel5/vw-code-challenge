@@ -9,6 +9,8 @@ export default function DataTable() {
   const navigate = useNavigate();
 
   if (studentsContext === undefined) {
+    navigate('/error');
+
     return;
   }
 
