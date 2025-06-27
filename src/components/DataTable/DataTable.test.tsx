@@ -2,10 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import DataTable from './DataTable';
 
 vi.mock('react-router', async () => {
-  const actual = await vi.importActual('react-router');
-
   return {
-    ...actual,
     useNavigate: () => vi.fn(),
   };
 });
