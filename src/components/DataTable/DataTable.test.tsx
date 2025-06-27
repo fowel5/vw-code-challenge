@@ -11,14 +11,14 @@ describe('BeautifulTable', () => {
           firstName: 'Alice',
           lastName: 'Smith',
           email: 'alice@example.com',
-          note: 7.3,
+          mark: 7.3,
         },
         {
           id: 2,
           firstName: 'Bob',
           lastName: 'Johnson',
           email: 'bob@example.com',
-          note: 2.4,
+          mark: 2.4,
         },
       ],
     });
@@ -34,7 +34,7 @@ describe('BeautifulTable', () => {
     expect(await screen.findByText('First Name')).toBeInTheDocument();
     expect(await screen.findByText('Last Name')).toBeInTheDocument();
     expect(await screen.findByText('Email')).toBeInTheDocument();
-    expect(await screen.findByText('Note')).toBeInTheDocument();
+    expect(await screen.findByText('mark')).toBeInTheDocument();
   });
 
   it('renders all students initially', async () => {

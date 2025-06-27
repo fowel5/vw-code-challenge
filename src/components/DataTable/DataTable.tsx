@@ -43,7 +43,7 @@ export default function DataTable() {
                 Email
               </th>
               <th className='px-6 py-4 text-left text-sm font-medium text-gray-700'>
-                Note
+                Mark
               </th>
             </tr>
           </thead>
@@ -66,7 +66,7 @@ export default function DataTable() {
                   {student.email}
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>
-                  {student.note}
+                  {student.mark}
                 </td>
               </tr>
             ))}
