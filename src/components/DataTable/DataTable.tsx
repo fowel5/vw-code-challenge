@@ -25,7 +25,7 @@ export default function DataTable() {
         onChange={(e) => setSearch(e.target.value)}
         className='mb-4 w-full max-w-md mx-auto block px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
       />
-      <div className='overflow-x-auto overflow-y-scroll max-h-[200px] rounded-2xl shadow-md'>
+      <div className='overflow-x-auto overflow-y-scroll max-h-[80vh] rounded-2xl shadow-md'>
         <table className='min-w-full w-auto divide-gray-200'>
           <thead className='bg-gray-100 sticky top-0'>
             <tr>
@@ -64,7 +64,11 @@ export default function DataTable() {
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>
                   {student.email}
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>
+                <td
+                  className={`px-6 py-4 whitespace-nowrap text-sm font-bold ${
+                    student.mark < 5 ? 'text-red-600' : 'text-green-600'
+                  }`}
+                >
                   {student.mark}
                 </td>
               </tr>
