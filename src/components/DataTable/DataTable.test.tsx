@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import DataTable from './DataTable';
 
-globalThis.fetch = vi.fn();
 describe('BeautifulTable', () => {
   beforeEach(() => {
     globalThis.fetch = vi.fn().mockResolvedValue({
@@ -12,14 +11,14 @@ describe('BeautifulTable', () => {
           firstName: 'Alice',
           lastName: 'Smith',
           email: 'alice@example.com',
-          note: 'Excellent',
+          note: 7.3,
         },
         {
           id: 2,
           firstName: 'Bob',
           lastName: 'Johnson',
           email: 'bob@example.com',
-          note: 'Good',
+          note: 2.4,
         },
       ],
     });
