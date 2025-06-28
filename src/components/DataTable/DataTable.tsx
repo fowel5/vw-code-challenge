@@ -26,7 +26,7 @@ export default function DataTable() {
       <div className='flex items-center gap-4 mb-4 w-full flex-col sm:flex-row'>
         <div>
           <button
-            className='bg-[#00A5A8] hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg shadow transition-colors duration-200 cursor-pointer'
+            className='bg-[#00A5A8] hover:bg-[rgba(0,165,168,0.8)] text-white font-semibold px-4 py-2 rounded-lg shadow transition-colors duration-200 cursor-pointer'
             onClick={() => setShowOverlay(true)}
           >
             + New Student
@@ -38,13 +38,13 @@ export default function DataTable() {
             placeholder='Search students...'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className='w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg shadow-sm outline-[#00A5A8]'
           />
         </div>
       </div>
       <div className='overflow-x-auto overflow-y-scroll rounded-2xl shadow-md max-h-[65vh]'>
         <table className='min-w-full w-auto divide-gray-200'>
-          <thead className='bg-gray-100 sticky top-0'>
+          <thead className='bg-[rgba(0,165,168,0.5)] sticky top-0'>
             <tr>
               <th className='px-6 py-4 text-left text-sm font-medium text-gray-700'>
                 ID
@@ -67,7 +67,7 @@ export default function DataTable() {
             {filteredData.map((student) => (
               <tr
                 key={student.id}
-                className='hover:bg-gray-50 transition-colors duration-200'
+                className='hover:bg-[rgba(0,165,168,0.1)] transition-colors duration-200'
                 onClick={() => {
                   navigate(`/student/${student.id}`);
                 }}
@@ -78,10 +78,10 @@ export default function DataTable() {
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
                   {student.firstName}
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
                   {student.lastName}
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-600'>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
                   {student.email}
                 </td>
                 <td
