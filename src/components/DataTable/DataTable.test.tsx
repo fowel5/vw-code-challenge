@@ -32,9 +32,9 @@ vi.mock('../../hooks/useStudents', () => ({
 describe('DataTable', () => {
   // There is no need for this tests to be async, since the data is mocked and no fetch operations are
   // done directly.
-  it('renders table headers', () => {
+  it('renders table headers', async () => {
     render(<DataTable />);
-    expect(screen.getByText('ID')).toBeInTheDocument();
+    expect(screen.getByText('ID ▲')).toBeInTheDocument();
     expect(screen.getByText('First Name')).toBeInTheDocument();
     expect(screen.getByText('Last Name')).toBeInTheDocument();
     expect(screen.getByText('Email')).toBeInTheDocument();
