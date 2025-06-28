@@ -35,6 +35,7 @@ export default function CreateStudentForm({
       mark: Number(form.mark),
     };
 
+    // TODO: add success message to show that it worked
     createStudent(newStudent)
       // if the request is successful, do not reload the page, just update the context and rerender the table
       .then((student) => setStudents([...students, student]))
