@@ -1,11 +1,11 @@
-import type { Student } from '../types/Student';
-
-export function searchStudent(
-  data: Student[],
+// I need the extends Record<string, unknown> in order to make Object.values(item),
+// It could be anything but I want to ensure those are only objects
+export function searchData<T extends Record<string, unknown>>(
+  data: T[],
   wordToSearch: string
-): Student[] {
+): T[] {
   return data.filter((item) => {
-    return JSON.stringify(item)
+    return JSON.stringify(Object.values(item))
       .toLowerCase()
       .includes(wordToSearch.toLowerCase());
   });
