@@ -4,5 +4,6 @@
   "semi": true,
   "singleQuote": true,
   "jsxSingleQuote": true,
-  "objectWrap": "preserve"
+  "objectWrap": "preserve",
+  "printWidth": 200
 }
