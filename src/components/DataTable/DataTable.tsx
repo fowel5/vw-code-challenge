@@ -1,20 +1,24 @@
 import { useState } from 'react';
-import { searchStudent } from '../../utils/filters';
+import { searchData } from '../../utils/filters';
 import { useStudents } from '../../hooks/useStudents';
 import { useNavigate } from 'react-router';
 import { createPortal } from 'react-dom';
 import Overlay from '../Overlay/Overlay';
 import CreateStudentForm from '../Overlay/CreateStudentForm';
+import useDebounce from '../../hooks/useDebounce';
 
 export default function DataTable() {
   const [search, setSearch] = useState('');
-  const [showOverlay, setShowOverlay] = useState(false);
 
+  // Use debounced value to avoid the that the table updates its state shifting
+  // the rows it is also useful if we did the search function via API
+  const debouncedSearchValue = useDebounce(search, 200);
+  const [showOverlay, setShowOverlay] = useState(false);
   const studentsContext = useStudents();
   const navigate = useNavigate();
 
   const { students } = studentsContext;
-  const filteredData = searchStudent(students, search);
+  const filteredData = searchData(students, debouncedSearchValue);
 
   return (
     <div className='p-6 max-w-full h-[80vh]'>
