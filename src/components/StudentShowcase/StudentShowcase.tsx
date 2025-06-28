@@ -24,7 +24,7 @@ export default function StudentShowCase() {
       <div className='flex justify-center'>
         <div className='overflow-x-auto rounded-2xl shadow-md w-full max-w-lg'>
           <table className='min-w-full w-auto divide-y divide-gray-200'>
-            <thead className='bg-gray-100'>
+            <thead className='bg-[rgba(0,165,168,0.5)]'>
               <tr>
                 <th className='px-6 py-3 text-left text-sm font-medium text-gray-700'>
                   Field
