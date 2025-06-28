@@ -11,14 +11,14 @@ vi.mock('react-router', async () => {
 
 const mockStudents = [
   {
-    id: '1',
+    id: 1,
     firstName: 'Alice',
     lastName: 'Smith',
     email: 'alice@example.com',
     mark: 7.3,
   },
   {
-    id: '2',
+    id: 2,
     firstName: 'Bob',
     lastName: 'Johnson',
     email: 'bob@example.com',

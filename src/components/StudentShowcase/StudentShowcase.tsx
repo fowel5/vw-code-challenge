@@ -4,13 +4,15 @@ import { useStudents } from '../../hooks/useStudents';
 export default function StudentShowCase() {
   const { id } = useParams();
   const studentContext = useStudents();
-
+  const studentIdToSearch = parseInt(id || '0');
   if (studentContext === undefined) {
     return undefined;
   }
 
   const { students } = studentContext;
-  const studentToShow = students.find((student) => student.id === id);
+  const studentToShow = students.find(
+    (student) => student.id === studentIdToSearch
+  );
 
   if (!studentToShow) {
     return <div className='text-center text-gray-500'>Student not found</div>;
