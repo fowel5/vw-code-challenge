@@ -6,6 +6,21 @@ import { createPortal } from 'react-dom';
 import Overlay from '../Overlay/Overlay';
 import CreateStudentForm from '../Overlay/CreateStudentForm';
 import useDebounce from '../../hooks/useDebounce';
+import type { Student } from '../../types/Student';
+import { sortStudents } from '../../utils/sort';
+
+type SortConfigType = {
+  key: keyof Student;
+  direction: 'asc' | 'desc';
+};
+
+const columns: Array<{ key: keyof Student; label: string }> = [
+  { key: 'id', label: 'ID' },
+  { key: 'firstName', label: 'First Name' },
+  { key: 'lastName', label: 'Last Name' },
+  { key: 'email', label: 'Email' },
+  { key: 'mark', label: 'Mark' },
+];
 
 export default function DataTable() {
   const [search, setSearch] = useState('');
@@ -16,9 +31,26 @@ export default function DataTable() {
   const [showOverlay, setShowOverlay] = useState(false);
   const studentsContext = useStudents();
   const navigate = useNavigate();
+  const [sortConfig, setSortConfig] = useState<SortConfigType>({
+    key: 'id',
+    direction: 'asc',
+  });
 
   const { students } = studentsContext;
   const filteredData = searchData(students, debouncedSearchValue);
+
+  const sortedData = sortStudents(filteredData, sortConfig);
+
+  function handleSort(key: keyof Student) {
+    setSortConfig((prev) => {
+      if (prev.key === key) {
+        return { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' };
+      }
+
+      // By default we will always sort in asc if new key
+      return { key, direction: 'asc' };
+    });
+  }
 
   return (
     <div className='p-6 max-w-full h-[80vh]'>
@@ -43,54 +75,41 @@ export default function DataTable() {
         </div>
       </div>
       <div className='overflow-x-auto overflow-y-scroll rounded-2xl shadow-md max-h-[65vh]'>
-        <table className='min-w-full w-auto divide-gray-200'>
-          <thead className='bg-[rgba(0,165,168,0.5)] sticky top-0'>
+        <table className='min-w-full w-auto'>
+          <thead className='bg-[rgba(0,165,168,0.5)] sticky top-0 '>
             <tr>
-              <th className='px-6 py-4 text-left text-sm font-medium text-gray-700'>
-                ID
-              </th>
-              <th className='px-6 py-4 text-left text-sm font-medium text-gray-700'>
-                First Name
-              </th>
-              <th className='px-6 py-4 text-left text-sm font-medium text-gray-700'>
-                Last Name
-              </th>
-              <th className='px-6 py-4 text-left text-sm font-medium text-gray-700'>
-                Email
-              </th>
-              <th className='px-6 py-4 text-left text-sm font-medium text-gray-700'>
-                Mark
-              </th>
+              {columns.map((col) => (
+                <th
+                  key={col.key}
+                  onClick={() => handleSort(col.key)}
+                  className='px-6 py-4 text-left text-sm font-medium text-gray-700 cursor-pointer select-none w-[100vw]'
+                >
+                  {col.label}
+                  {sortConfig.key === col.key &&
+                    (sortConfig.direction === 'asc' ? ' ▲' : ' ▼')}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((student) => (
+            {sortedData.map((student) => (
               <tr
                 key={student.id}
-                className='hover:bg-[rgba(0,165,168,0.1)] transition-colors duration-200'
-                onClick={() => {
-                  navigate(`/student/${student.id}`);
-                }}
+                className='hover:bg-[rgba(0,165,168,0.1)] transition-colors duration-200 cursor-pointer'
+                onClick={() => navigate(`/student/${student.id}`)}
               >
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                  {student.id}
-                </td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                  {student.firstName}
-                </td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                  {student.lastName}
-                </td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                  {student.email}
-                </td>
-                <td
-                  className={`px-6 py-4 whitespace-nowrap text-sm font-bold ${
-                    student.mark < 5 ? 'text-red-600' : 'text-green-600'
-                  }`}
-                >
-                  {student.mark}
-                </td>
+                {columns.map((col) => (
+                  <td
+                    key={col.key}
+                    className={`px-6 py-4 text-sm text-gray-900 ${
+                      col.key === 'mark'
+                        ? `font-bold ${student.mark < 5 ? 'text-red-600' : 'text-green-600'}`
+                        : ''
+                    }`}
+                  >
+                    {student[col.key]}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
