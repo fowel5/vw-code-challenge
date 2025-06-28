@@ -3,6 +3,12 @@ import { useStudents } from './useStudents';
 import { StudentContext } from '../logic/StudentsProvider';
 import type { ReactNode } from 'react';
 
+vi.mock('react-router', async () => {
+  return {
+    useNavigate: () => vi.fn(),
+  };
+});
+
 const mockStudents = [
   {
     id: '1',
@@ -22,7 +28,7 @@ const mockStudents = [
 const setStudents = vi.fn();
 
 describe('useStudents', () => {
-  it('returns value from context', () => {
+  it('returns right values from context', () => {
     const wrapper = ({ children }: { children: ReactNode }) => (
       <StudentContext.Provider value={{ students: mockStudents, setStudents }}>
         {children}
@@ -37,7 +43,7 @@ describe('useStudents', () => {
     });
   });
 
-  it('returns value from context', () => {
+  it('handles the undefined from the context', () => {
     const wrapper = ({ children }: { children: ReactNode }) => (
       <StudentContext.Provider value={undefined}>
         {children}
@@ -46,6 +52,9 @@ describe('useStudents', () => {
 
     const { result } = renderHook(() => useStudents(), { wrapper });
 
-    expect(result.current).toStrictEqual(undefined);
+    // since we return a function from the context and we check it with another function, we can not check for strict equality
+    // Background: () => {} !== () => {}
+    expect(result.current.students).toEqual([]);
+    expect(typeof result.current.setStudents).toBe('function');
   });
 });

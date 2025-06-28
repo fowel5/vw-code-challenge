@@ -49,7 +49,7 @@ describe('DataTable', () => {
 
   it('filters students by first name', async () => {
     render(<DataTable />);
-    const input = await screen.findByPlaceholderText('Search users...');
+    const input = await screen.findByPlaceholderText('Search students...');
     fireEvent.change(input, { target: { value: 'Alice' } });
     expect(await screen.findByText('Alice')).toBeInTheDocument();
     expect(await screen.queryByText('Bob')).not.toBeInTheDocument();
@@ -57,7 +57,7 @@ describe('DataTable', () => {
 
   it('filters students by last name', async () => {
     render(<DataTable />);
-    const input = await screen.findByPlaceholderText('Search users...');
+    const input = await screen.findByPlaceholderText('Search students...');
     fireEvent.change(input, { target: { value: 'Johnson' } });
     expect(await screen.findByText('Bob')).toBeInTheDocument();
     expect(await screen.queryByText('Alice')).not.toBeInTheDocument();
