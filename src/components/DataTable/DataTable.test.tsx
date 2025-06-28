@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import DataTable from './DataTable';
 
 vi.mock('react-router', async () => {
@@ -30,36 +30,43 @@ vi.mock('../../hooks/useStudents', () => ({
 }));
 
 describe('DataTable', () => {
-  it('renders table headers', async () => {
+  // There is no need for this tests to be async, since the data is mocked and no fetch operations are
+  // done directly.
+  it('renders table headers', () => {
     render(<DataTable />);
-    expect(await screen.findByText('ID')).toBeInTheDocument();
-    expect(await screen.findByText('First Name')).toBeInTheDocument();
-    expect(await screen.findByText('Last Name')).toBeInTheDocument();
-    expect(await screen.findByText('Email')).toBeInTheDocument();
-    expect(await screen.findByText('Mark')).toBeInTheDocument();
+    expect(screen.getByText('ID')).toBeInTheDocument();
+    expect(screen.getByText('First Name')).toBeInTheDocument();
+    expect(screen.getByText('Last Name')).toBeInTheDocument();
+    expect(screen.getByText('Email')).toBeInTheDocument();
+    expect(screen.getByText('Mark')).toBeInTheDocument();
   });
 
   it('renders all students initially', async () => {
     render(<DataTable />);
-    expect(await screen.findByText('Alice')).toBeInTheDocument();
-    expect(await screen.findByText('Bob')).toBeInTheDocument();
-    expect(await screen.findByText('alice@example.com')).toBeInTheDocument();
-    expect(await screen.findByText('bob@example.com')).toBeInTheDocument();
+    expect(screen.getByText('Alice')).toBeInTheDocument();
+    expect(screen.getByText('Bob')).toBeInTheDocument();
+    expect(screen.getByText('alice@example.com')).toBeInTheDocument();
+    expect(screen.getByText('bob@example.com')).toBeInTheDocument();
   });
 
   it('filters students by first name', async () => {
     render(<DataTable />);
     const input = await screen.findByPlaceholderText('Search students...');
     fireEvent.change(input, { target: { value: 'Alice' } });
-    expect(await screen.findByText('Alice')).toBeInTheDocument();
-    expect(await screen.queryByText('Bob')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Alice')).toBeInTheDocument();
+      expect(screen.queryByText('Bob')).not.toBeInTheDocument();
+    });
   });
 
   it('filters students by last name', async () => {
     render(<DataTable />);
     const input = await screen.findByPlaceholderText('Search students...');
     fireEvent.change(input, { target: { value: 'Johnson' } });
-    expect(await screen.findByText('Bob')).toBeInTheDocument();
-    expect(await screen.queryByText('Alice')).not.toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByText('Bob')).toBeInTheDocument();
+      expect(screen.queryByText('Alice')).not.toBeInTheDocument();
+    });
   });
 });
