@@ -5,10 +5,7 @@ export type SortConfigType = {
   direction: 'asc' | 'desc';
 };
 
-export function sortStudents<T extends Record<string, string | number>>(
-  data: T[],
-  sortConfig: SortConfigType
-): T[] {
+export function sortStudents<T extends Record<string, string | number>>(data: T[], sortConfig: SortConfigType): T[] {
   // sort mutes the data, so we give a shallow copy of data
   return [...data].sort((a, b) => {
     const aValue = a[sortConfig.key];

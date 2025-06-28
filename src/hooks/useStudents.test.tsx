@@ -29,11 +29,7 @@ const setStudents = vi.fn();
 
 describe('useStudents', () => {
   it('returns right values from context', () => {
-    const wrapper = ({ children }: { children: ReactNode }) => (
-      <StudentContext.Provider value={{ students: mockStudents, setStudents }}>
-        {children}
-      </StudentContext.Provider>
-    );
+    const wrapper = ({ children }: { children: ReactNode }) => <StudentContext.Provider value={{ students: mockStudents, setStudents }}>{children}</StudentContext.Provider>;
 
     const { result } = renderHook(() => useStudents(), { wrapper });
 
@@ -44,11 +40,7 @@ describe('useStudents', () => {
   });
 
   it('handles the undefined from the context', () => {
-    const wrapper = ({ children }: { children: ReactNode }) => (
-      <StudentContext.Provider value={undefined}>
-        {children}
-      </StudentContext.Provider>
-    );
+    const wrapper = ({ children }: { children: ReactNode }) => <StudentContext.Provider value={undefined}>{children}</StudentContext.Provider>;
 
     const { result } = renderHook(() => useStudents(), { wrapper });
 

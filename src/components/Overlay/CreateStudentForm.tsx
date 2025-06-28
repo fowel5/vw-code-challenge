@@ -3,11 +3,7 @@ import type { Student } from '../../types/Student';
 import { createStudent } from '../../api/studentsApi';
 import { useStudents } from '../../hooks/useStudents';
 
-export default function CreateStudentForm({
-  onClose,
-}: {
-  onClose: () => void;
-}) {
+export default function CreateStudentForm({ onClose }: { onClose: () => void }) {
   const { students, setStudents } = useStudents();
   const [form, setForm] = useState({
     firstName: '',
@@ -47,45 +43,13 @@ export default function CreateStudentForm({
     <form onSubmit={handleSubmit} className='w-full flex flex-col items-center'>
       <h2 className='text-xl font-bold mb-4'>Create New Student</h2>
       <div className='w-full mb-3'>
-        <input
-          name='firstName'
-          placeholder='First Name'
-          value={form.firstName}
-          onChange={handleChange}
-          className='w-full px-3 py-2 border rounded mb-2'
-        />
-        <input
-          name='lastName'
-          placeholder='Last Name'
-          value={form.lastName}
-          onChange={handleChange}
-          className='w-full px-3 py-2 border rounded mb-2'
-        />
-        <input
-          name='email'
-          placeholder='Email'
-          value={form.email}
-          onChange={handleChange}
-          className='w-full px-3 py-2 border rounded mb-2'
-          type='email'
-        />
-        <input
-          name='mark'
-          placeholder='Mark'
-          value={form.mark}
-          onChange={handleChange}
-          className='w-full px-3 py-2 border rounded mb-2'
-          type='number'
-          min='0'
-          max='10'
-          step='0.1'
-        />
+        <input name='firstName' placeholder='First Name' value={form.firstName} onChange={handleChange} className='w-full px-3 py-2 border rounded mb-2' />
+        <input name='lastName' placeholder='Last Name' value={form.lastName} onChange={handleChange} className='w-full px-3 py-2 border rounded mb-2' />
+        <input name='email' placeholder='Email' value={form.email} onChange={handleChange} className='w-full px-3 py-2 border rounded mb-2' type='email' />
+        <input name='mark' placeholder='Mark' value={form.mark} onChange={handleChange} className='w-full px-3 py-2 border rounded mb-2' type='number' min='0' max='10' step='0.1' />
       </div>
       {error && <div className='text-red-600 mb-2'>{error}</div>}
-      <button
-        type='submit'
-        className='bg-[#00A5A8] hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold shadow mt-2'
-      >
+      <button type='submit' className='bg-[#00A5A8] hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold shadow mt-2'>
         Create
       </button>
     </form>

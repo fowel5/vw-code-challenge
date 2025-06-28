@@ -35,9 +35,7 @@ describe('StudentsProvider', () => {
   });
 
   it('fetches students and provides them via context', async () => {
-    let contextValue:
-      | { students: Student[]; setStudents: (students: Student[]) => void }
-      | undefined = undefined;
+    let contextValue: { students: Student[]; setStudents: (students: Student[]) => void } | undefined = undefined;
 
     const MockedComponent = () => {
       contextValue = React.useContext(StudentContext);
@@ -60,9 +58,7 @@ describe('StudentsProvider', () => {
   });
 
   it('setStudents updates the students in context', async () => {
-    let contextValue:
-      | { students: Student[]; setStudents: (students: Student[]) => void }
-      | undefined = undefined;
+    let contextValue: { students: Student[]; setStudents: (students: Student[]) => void } | undefined = undefined;
 
     const MockedComponent = () => {
       contextValue = React.useContext(StudentContext);
