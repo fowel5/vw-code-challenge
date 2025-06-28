@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useEffect,
-  useState,
-  type JSX,
-  type ReactNode,
-} from 'react';
+import { createContext, useEffect, useState, type JSX, type ReactNode } from 'react';
 import type { Student } from '../types/Student';
 import { fetchStudents } from '../api/studentsApi';
 
@@ -21,9 +15,7 @@ export const StudentContext = createContext<
   | undefined
 >(undefined);
 
-export const StudentsProvider = ({
-  children,
-}: StudentsProviderProps): JSX.Element => {
+export const StudentsProvider = ({ children }: StudentsProviderProps): JSX.Element => {
   const [students, setStudents] = useState<Student[]>([]);
   const [isRequestFailed, setIsRequestFailed] = useState(false);
 
@@ -33,11 +25,5 @@ export const StudentsProvider = ({
       .catch(() => setIsRequestFailed(true));
   }, []);
 
-  return (
-    <StudentContext.Provider
-      value={isRequestFailed ? undefined : { students, setStudents }}
-    >
-      {children}
-    </StudentContext.Provider>
-  );
+  return <StudentContext.Provider value={isRequestFailed ? undefined : { students, setStudents }}>{children}</StudentContext.Provider>;
 };

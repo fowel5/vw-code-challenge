@@ -10,9 +10,7 @@ export default function StudentShowCase() {
   }
 
   const { students } = studentContext;
-  const studentToShow = students.find(
-    (student) => student.id === studentIdToSearch
-  );
+  const studentToShow = students.find((student) => student.id === studentIdToSearch);
 
   if (!studentToShow) {
     return <div className='text-center text-gray-500'>Student not found</div>;
@@ -26,58 +24,30 @@ export default function StudentShowCase() {
           <table className='min-w-full w-auto divide-y divide-gray-200'>
             <thead className='bg-[rgba(0,165,168,0.5)]'>
               <tr>
-                <th className='px-6 py-3 text-left text-sm font-medium text-gray-700'>
-                  Field
-                </th>
-                <th className='px-6 py-3 text-left text-sm font-medium text-gray-700'>
-                  Value
-                </th>
+                <th className='px-6 py-3 text-left text-sm font-medium text-gray-700'>Field</th>
+                <th className='px-6 py-3 text-left text-sm font-medium text-gray-700'>Value</th>
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-100'>
               <tr>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>
-                  ID
-                </td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                  {studentToShow.id}
-                </td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>ID</td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>{studentToShow.id}</td>
               </tr>
               <tr>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>
-                  First Name
-                </td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                  {studentToShow.firstName}
-                </td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>First Name</td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>{studentToShow.firstName}</td>
               </tr>
               <tr>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>
-                  Last Name
-                </td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                  {studentToShow.lastName}
-                </td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>Last Name</td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>{studentToShow.lastName}</td>
               </tr>
               <tr>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>
-                  Email
-                </td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                  {studentToShow.email}
-                </td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>Email</td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>{studentToShow.email}</td>
               </tr>
               <tr>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>
-                  Mark
-                </td>
-                <td
-                  className={`px-6 py-4 whitespace-nowrap text-sm font-bold ${
-                    studentToShow.mark < 5 ? 'text-red-600' : 'text-green-600'
-                  }`}
-                >
-                  {studentToShow.mark}
-                </td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>Mark</td>
+                <td className={`px-6 py-4 whitespace-nowrap text-sm font-bold ${studentToShow.mark < 5 ? 'text-red-600' : 'text-green-600'}`}>{studentToShow.mark}</td>
               </tr>
             </tbody>
           </table>

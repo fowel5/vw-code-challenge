@@ -79,34 +79,18 @@ export default function DataTable() {
           <thead className='bg-[rgba(0,165,168,0.5)] sticky top-0 '>
             <tr>
               {columns.map((col) => (
-                <th
-                  key={col.key}
-                  onClick={() => handleSort(col.key)}
-                  className='px-6 py-4 text-left text-sm font-medium text-gray-700 cursor-pointer select-none w-[100vw]'
-                >
+                <th key={col.key} onClick={() => handleSort(col.key)} className='px-6 py-4 text-left text-sm font-medium text-gray-700 cursor-pointer select-none w-[100vw]'>
                   {col.label}
-                  {sortConfig.key === col.key &&
-                    (sortConfig.direction === 'asc' ? ' ▲' : ' ▼')}
+                  {sortConfig.key === col.key && (sortConfig.direction === 'asc' ? ' ▲' : ' ▼')}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
             {sortedData.map((student) => (
-              <tr
-                key={student.id}
-                className='hover:bg-[rgba(0,165,168,0.1)] transition-colors duration-200 cursor-pointer'
-                onClick={() => navigate(`/student/${student.id}`)}
-              >
+              <tr key={student.id} className='hover:bg-[rgba(0,165,168,0.1)] transition-colors duration-200 cursor-pointer' onClick={() => navigate(`/student/${student.id}`)}>
                 {columns.map((col) => (
-                  <td
-                    key={col.key}
-                    className={`px-6 py-4 text-sm text-gray-900 ${
-                      col.key === 'mark'
-                        ? `font-bold ${student.mark < 5 ? 'text-red-600' : 'text-green-600'}`
-                        : ''
-                    }`}
-                  >
+                  <td key={col.key} className={`px-6 py-4 text-sm text-gray-900 ${col.key === 'mark' ? `font-bold ${student.mark < 5 ? 'text-red-600' : 'text-green-600'}` : ''}`}>
                     {student[col.key]}
                   </td>
                 ))}
