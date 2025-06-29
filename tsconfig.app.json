@@ -22,7 +22,7 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "types": ["vitest/globals", "@testing-library/jest-dom", "cypress"]
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src", "cypress"]
+  "include": ["src"]
 }
