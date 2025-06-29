@@ -4,7 +4,7 @@ import { useStudents } from '../../hooks/useStudents';
 import { useNavigate } from 'react-router';
 import { createPortal } from 'react-dom';
 import Overlay from '../Overlay/Overlay';
-import CreateStudentForm from '../Overlay/CreateStudentForm';
+import StudentForm from '../Overlay/StudentForm';
 import useDebounce from '../../hooks/useDebounce';
 import type { Student } from '../../types/Student';
 import { sortStudents } from '../../utils/sort';
@@ -25,9 +25,9 @@ const columns: Array<{ key: keyof Student; label: string }> = [
 export default function DataTable() {
   const [search, setSearch] = useState('');
 
-  // Use debounced value to avoid the that the table updates its state shifting
-  // the rows it is also useful if we did the search function via API
-  const debouncedSearchValue = useDebounce(search, 200);
+  // Use debounced value to avoid that the table updates its state shifting
+  // the rows. It is also useful if we did the search function via API
+  const debouncedSearchValue = useDebounce(search, 300);
   const [showOverlay, setShowOverlay] = useState(false);
   const studentsContext = useStudents();
   const navigate = useNavigate();
@@ -76,10 +76,10 @@ export default function DataTable() {
       </div>
       <div className='overflow-x-auto overflow-y-scroll rounded-2xl shadow-md max-h-[65vh]'>
         <table className='min-w-full w-auto'>
-          <thead className='bg-[rgba(0,165,168,0.5)] sticky top-0 '>
+          <thead className='bg-[#00A5A8] sticky top-0 '>
             <tr>
               {columns.map((col) => (
-                <th key={col.key} onClick={() => handleSort(col.key)} className='px-6 py-4 text-left text-sm font-medium text-gray-700 cursor-pointer select-none w-[100vw]'>
+                <th key={col.key} onClick={() => handleSort(col.key)} className='px-6 py-4 text-left text-sm font-medium text-white cursor-pointer select-none w-[100vw]'>
                   {col.label}
                   {sortConfig.key === col.key && (sortConfig.direction === 'asc' ? ' ▲' : ' ▼')}
                 </th>
@@ -106,7 +106,7 @@ export default function DataTable() {
               setShowOverlay(false);
             }}
           >
-            <CreateStudentForm
+            <StudentForm
               onClose={() => {
                 setShowOverlay(false);
               }}
