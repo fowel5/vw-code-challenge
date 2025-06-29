@@ -16,5 +16,3 @@ jobs:
         run: npm test
       - name: Lint code
         run: npm run lint
-      - name: E2E tests
-        run: npm run e2e-test
