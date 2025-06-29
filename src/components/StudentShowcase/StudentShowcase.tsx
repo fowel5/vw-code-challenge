@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 import { useStudents } from '../../hooks/useStudents';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -25,7 +25,10 @@ export default function StudentShowCase() {
 
   return (
     <div className='p-6 max-w-auto h-[80vh]'>
-      <h2 className='text-2xl font-bold mb-4 text-center'>Student Details</h2>
+      <Link to={'/'}>
+        <button className='text-[#00A5A8] hover:underline font-semibold px-2 py-1 cursor-pointer absolute'>← Back to Home</button>
+      </Link>
+      <h2 className='text-2xl font-bold text-center pb-4'>Student Details</h2>
       <div className='flex justify-center mb-4 gap-4'>
         <button
           className='bg-[#00A5A8] hover:bg-[rgba(0,165,168,0.8)] text-white font-semibold px-4 py-2 rounded-lg shadow transition-colors duration-200 cursor-pointer'
@@ -74,7 +77,7 @@ export default function StudentShowCase() {
       {isDelete &&
         createPortal(
           <Overlay onClose={() => setIsDelete(false)}>
-            <DeleteForm student={studentToShow} onClose={() => setIsDelete(false)} />
+            <DeleteForm studentToDelete={studentToShow} onClose={() => setIsDelete(false)} />
           </Overlay>,
           document.body
         )}

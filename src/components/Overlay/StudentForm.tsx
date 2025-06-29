@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import type { Student } from '../../types/Student';
-import { createStudent } from '../../api/studentsApi';
+import { createStudent, updateStudent } from '../../api/studentsApi';
 import { useStudents } from '../../hooks/useStudents';
 import { useNavigate, useParams } from 'react-router';
+import { toast } from 'react-toastify';
 
 export default function StudentForm({ onClose }: { onClose: () => void }) {
   const { students, setStudents } = useStudents();
@@ -13,16 +14,7 @@ export default function StudentForm({ onClose }: { onClose: () => void }) {
   // If there is NO student, it would be a create form.
   const studentToFind = students.find((student) => student.id === parsedId);
 
-  const [form, setForm] = useState(
-    studentToFind
-      ? studentToFind
-      : {
-          firstName: '',
-          lastName: '',
-          email: '',
-          mark: '',
-        }
-  );
+  const [form, setForm] = useState(studentToFind ? studentToFind : { id: '', firstName: '', lastName: '', email: '', mark: '' });
 
   const navigate = useNavigate();
   const [error, setError] = useState('');
@@ -40,26 +32,47 @@ export default function StudentForm({ onClose }: { onClose: () => void }) {
       return;
     }
 
-    const newStudent: Omit<Student, 'id'> = {
-      firstName: form.firstName,
-      lastName: form.lastName,
-      email: form.email,
-      mark: Number(form.mark),
-    };
+    if (!studentToFind) {
+      const newStudent: Omit<Student, 'id'> = {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        email: form.email,
+        mark: Number(form.mark),
+      };
 
-    // TODO: add success message to show that it worked
-    createStudent(newStudent)
-      // if the request is successful, do not reload the page nor send a fetch, just update the context and rerender the table
-      .then((student) => setStudents([...students, student]))
-      .catch((error) => alert(`Request failed with error: ${error}`));
+      createStudent(newStudent)
+        // if the request is successful, do not reload the page nor send a fetch, just update the context and rerender the table
+        .then((student) => {
+          setStudents([...students, student]);
+          toast.success(`The student ${student.firstName} ${student.lastName} was successfully created`);
+        })
+        .catch(() => toast.error('Student could not be created'));
+    }
+
+    if (studentToFind) {
+      const studentToUpdate: Student = {
+        id: studentToFind.id,
+        firstName: form.firstName,
+        lastName: form.lastName,
+        email: form.email,
+        mark: Number(form.mark),
+      };
+      updateStudent(studentToUpdate)
+        .then((updatedStudent) => {
+          setStudents(students.map((student) => (student.id === updatedStudent.id ? updatedStudent : student)));
+          toast.success(`The student was successfully updated`);
+        })
+        .catch(() => toast.error('The student could not be updated'));
+    }
+
+    navigate(`/student/${id}`);
     onClose();
   };
-  // TODO: ADD toast to confirm
 
   return (
     <>
       <form onSubmit={handleSubmit} className={`w-full max-w-[50vw] flex flex-col justify-self-center items-center ${studentToFind ? 'h-[80vh] p-6' : ''}`}>
-        <h2 className='text-2xl font-bold mb-4 text-center'>Create New Student</h2>
+        <h2 className='text-2xl font-bold mb-4 text-center'>{studentToFind ? `Edit Student with ID: ${studentToFind.id}` : 'Create New Student'}</h2>
         <div className='w-full mb-3'>
           <input required={true} name='firstName' placeholder='First Name' value={form.firstName} onChange={handleChange} className='w-full px-3 py-2 border rounded mb-2' />
           <input required={true} name='lastName' placeholder='Last Name' value={form.lastName} onChange={handleChange} className='w-full px-3 py-2 border rounded mb-2' />
