@@ -47,6 +47,7 @@ export default function StudentForm({ onClose }: { onClose: () => void }) {
           toast.success(`The student ${student.firstName} ${student.lastName} was successfully created`);
         })
         .catch(() => toast.error('Student could not be created'));
+      navigate('/');
     }
 
     if (studentToFind) {
@@ -63,9 +64,9 @@ export default function StudentForm({ onClose }: { onClose: () => void }) {
           toast.success(`The student was successfully updated`);
         })
         .catch(() => toast.error('The student could not be updated'));
+      navigate(`/student/${id}`);
     }
 
-    navigate(`/student/${id}`);
     onClose();
   };
 
@@ -82,7 +83,7 @@ export default function StudentForm({ onClose }: { onClose: () => void }) {
         {error && <div className='text-red-600 mb-2'>{error}</div>}
         <div className='flex gap-4'>
           <button type='submit' className='bg-[#00A5A8] hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold shadow mt-2'>
-            {studentToFind ? 'Edit' : 'Create'}
+            {studentToFind ? 'Save' : 'Create'}
           </button>
           {studentToFind ? (
             <button type='button' onClick={() => navigate(`/student/${id}`)} className='bg-[#00A5A8] hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold shadow mt-2'>

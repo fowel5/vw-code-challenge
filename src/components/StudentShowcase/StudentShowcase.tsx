@@ -31,12 +31,17 @@ export default function StudentShowCase() {
       <h2 className='text-2xl font-bold text-center pb-4'>Student Details</h2>
       <div className='flex justify-center mb-4 gap-4'>
         <button
+          data-testid='edit'
           className='bg-[#00A5A8] hover:bg-[rgba(0,165,168,0.8)] text-white font-semibold px-4 py-2 rounded-lg shadow transition-colors duration-200 cursor-pointer'
           onClick={() => navigate(`/student/${id}/edit`)}
         >
           Edit
         </button>
-        <button className='bg-red-600 hover:opacity-75 text-white font-semibold px-4 py-2 rounded-lg shadow transition-opacity duration-200 cursor-pointer' onClick={() => setIsDelete(true)}>
+        <button
+          data-testid='delete'
+          className='bg-red-600 hover:opacity-75 text-white font-semibold px-4 py-2 rounded-lg shadow transition-opacity duration-200 cursor-pointer'
+          onClick={() => setIsDelete(true)}
+        >
           Delete
         </button>
       </div>
@@ -56,7 +61,9 @@ export default function StudentShowCase() {
               </tr>
               <tr>
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>First Name</td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>{studentToShow.firstName}</td>
+                <td data-testid='firstName' className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                  {studentToShow.firstName}
+                </td>
               </tr>
               <tr>
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>Last Name</td>
