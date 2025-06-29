@@ -9,7 +9,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Error from './components/Error/Error';
 import PageNotFound from './components/Error/PageNotFound';
-import StudentForm from './components/Overlay/StudentForm';
+import StudentForm from './components/Forms/StudentForm';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

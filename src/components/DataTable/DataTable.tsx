@@ -4,7 +4,7 @@ import { useStudents } from '../../hooks/useStudents';
 import { useNavigate } from 'react-router';
 import { createPortal } from 'react-dom';
 import Overlay from '../Overlay/Overlay';
-import StudentForm from '../Overlay/StudentForm';
+import StudentForm from '../Forms/StudentForm';
 import useDebounce from '../../hooks/useDebounce';
 import type { Student } from '../../types/Student';
 import { sortStudents } from '../../utils/sort';
