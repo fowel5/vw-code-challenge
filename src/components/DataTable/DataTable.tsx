@@ -53,7 +53,7 @@ export default function DataTable() {
   }
 
   return (
-    <div className='p-6 max-w-full h-[80vh]'>
+    <div className='max-w-auto'>
       <h1 className='text-2xl font-bold mb-4 text-center'>Students Overview</h1>
       <div className='flex items-center gap-4 mb-4 w-full flex-col sm:flex-row'>
         <div>

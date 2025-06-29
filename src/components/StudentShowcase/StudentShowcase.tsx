@@ -24,7 +24,7 @@ export default function StudentShowCase() {
   }
 
   return (
-    <div className='p-6 max-w-auto h-[80vh]'>
+    <div className='max-w-auto'>
       <Link to={'/'}>
         <button className='text-[#00A5A8] hover:underline font-semibold px-2 py-1 cursor-pointer absolute'>← Back to Home</button>
       </Link>

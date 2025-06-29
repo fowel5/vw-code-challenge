@@ -72,7 +72,7 @@ export default function StudentForm({ onClose }: { onClose: () => void }) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className={`w-full max-w-[50vw] flex flex-col justify-self-center items-center ${studentToFind ? 'h-[80vh] p-6' : ''}`}>
+      <form onSubmit={handleSubmit} className={`w-full max-w-[30vw] flex flex-col justify-self-center items-center ${studentToFind ? 'h-[80vh] p-6' : ''}`}>
         <h2 className='text-2xl font-bold mb-4 text-center'>{studentToFind ? `Edit Student with ID: ${studentToFind.id}` : 'Create New Student'}</h2>
         <div className='w-full mb-3'>
           <input required={true} name='firstName' placeholder='First Name' value={form.firstName} onChange={handleChange} className='w-full px-3 py-2 border rounded mb-2' />
