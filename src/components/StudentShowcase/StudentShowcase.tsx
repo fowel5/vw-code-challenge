@@ -3,7 +3,7 @@ import { useStudents } from '../../hooks/useStudents';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import Overlay from '../Overlay/Overlay';
-import { DeleteForm } from '../Overlay/DeleteForm';
+import { DeleteForm } from '../Forms/DeleteForm';
 
 export default function StudentShowCase() {
   const { id } = useParams();
