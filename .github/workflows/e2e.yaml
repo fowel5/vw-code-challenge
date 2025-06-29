@@ -10,10 +10,6 @@ jobs:
       image: cypress/browsers:22.15.0
       options: --user 1001
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Cypress run
         uses: cypress-io/github-action@v6
-        with:
-          start: npm run e2e-test
-          browser: chrome
+        run: npm run e2e-test
