@@ -4,13 +4,17 @@ import './index.css';
 import { StudentsProvider } from './logic/StudentsProvider';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import DataTable from './components/DataTable/DataTable';
-import StudentShowCase from './components/StudentShowcase/StudentShowcase';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import Error from './components/Error/Error';
-import PageNotFound from './components/Error/PageNotFound';
-import StudentForm from './components/Forms/StudentForm';
 import LayoutWrapper from './components/LayoutWrapper/LayoutWrapper';
+import React from 'react';
+import StudentForm from './components/Forms/StudentForm';
+
+const StudentShowCase = React.lazy(() => import('./components/StudentShowcase/StudentShowcase'));
+// It is useless to lazy load student form, because it is imported in StudentShowCase and therefore in its chunk.
+// const StudentForm = React.lazy(() => import('./components/Forms/StudentForm'));
+const Error = React.lazy(() => import('./components/Error/Error'));
+const PageNotFound = React.lazy(() => import('./components/Error/PageNotFound'));
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
