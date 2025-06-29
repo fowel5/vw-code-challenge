@@ -20,6 +20,7 @@ export function DeleteForm({ studentToDelete, onClose }: { studentToDelete: Stud
       </p>
       <div className='flex gap-4'>
         <button
+          data-testid='finaldelete'
           type='button'
           className='bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold shadow'
           onClick={() => {
