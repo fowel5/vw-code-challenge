@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Student } from '../../types/Student';
 import { createStudent, updateStudent } from '../../api/studentsApi';
 import { useStudents } from '../../hooks/useStudents';
 import { useNavigate, useParams } from 'react-router';
 import { toast } from 'react-toastify';
+import { isDirtyOrNotFilled } from '../../helpers/isDirtyOrNotFilled';
 
 export default function StudentForm({ onClose }: { onClose: () => void }) {
   const { students, setStudents } = useStudents();
@@ -14,23 +15,43 @@ export default function StudentForm({ onClose }: { onClose: () => void }) {
   // If there is NO student, it would be a create form.
   const studentToFind = students.find((student) => student.id === parsedId);
 
-  const [form, setForm] = useState(studentToFind ? studentToFind : { id: '', firstName: '', lastName: '', email: '', mark: '' });
+  const [form, setForm] = useState(studentToFind ? { ...studentToFind, mark: String(studentToFind.mark) } : { id: '', firstName: '', lastName: '', email: '', mark: '' });
+  const [isSubmitButtonEnabled, setIsSubmitButtonEnabled] = useState(false);
+
+  // Use it as safety net if you visit directly the route without loading the context first
+  useEffect(() => {
+    if (studentToFind) {
+      setForm({ ...studentToFind, mark: String(studentToFind.mark) });
+    }
+  }, [studentToFind]);
 
   const navigate = useNavigate();
-  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    // Prepare params for isDirtyOrNotFilled
+    const newOrEditedStudent = {
+      firstName: e.target.name === 'firstName' ? e.target.value : form.firstName,
+      lastName: e.target.name === 'lastName' ? e.target.value : form.lastName,
+      email: e.target.name === 'email' ? e.target.value : form.email,
+      mark: e.target.name === 'mark' ? e.target.value : form.mark,
+    };
+    const existingStudent = studentToFind
+      ? {
+          firstName: studentToFind.firstName,
+          lastName: studentToFind.lastName,
+          email: studentToFind.email,
+          mark: String(studentToFind.mark),
+        }
+      : undefined;
+
+    setIsSubmitButtonEnabled(isDirtyOrNotFilled({ newOrEditedStudent, existingStudent }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!form.firstName || !form.lastName || !form.email || !form.mark) {
-      setError('You need to fill every field!');
-
-      return;
-    }
+    // we do not need to check for uncomplete students since the button is disabled for it
 
     if (!studentToFind) {
       const newStudent: Omit<Student, 'id'> = {
@@ -80,13 +101,20 @@ export default function StudentForm({ onClose }: { onClose: () => void }) {
           <input required={true} name='email' placeholder='Email' value={form.email} onChange={handleChange} className='w-full px-3 py-2 border rounded mb-2' type='email' />
           <input required={true} name='mark' placeholder='Mark' value={form.mark} onChange={handleChange} className='w-full px-3 py-2 border rounded mb-2' type='number' min='0' max='10' step='0.1' />
         </div>
-        {error && <div className='text-red-600 mb-2'>{error}</div>}
         <div className='flex gap-4'>
-          <button type='submit' className='bg-[#00A5A8] hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold shadow mt-2'>
+          <button
+            type='submit'
+            disabled={!isSubmitButtonEnabled}
+            className='bg-[#00A5A8] hover:opacity-75 text-white px-4 py-2 transition-opacity rounded-lg font-semibold shadow mt-2 cursor-pointer disabled:opacity-30 disabled:cursor-default'
+          >
             {studentToFind ? 'Save' : 'Create'}
           </button>
           {studentToFind ? (
-            <button type='button' onClick={() => navigate(`/student/${id}`)} className='bg-[#00A5A8] hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold shadow mt-2'>
+            <button
+              type='button'
+              onClick={() => navigate(`/student/${id}`)}
+              className='bg-[#00A5A8] hover:opacity-75 text-white px-4 py-2 transition-opacity rounded-lg font-semibold shadow mt-2 cursor-pointer'
+            >
               Cancel
             </button>
           ) : (
