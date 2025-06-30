@@ -7,7 +7,7 @@ import Overlay from '../Overlay/Overlay';
 import StudentForm from '../Forms/StudentForm';
 import useDebounce from '../../hooks/useDebounce';
 import type { Student } from '../../types/Student';
-import { sortObjects } from '../../utils/sort';
+import { sortObjectsArrayById } from '../../utils/sort';
 
 type SortConfigType = {
   key: keyof Student;
@@ -39,7 +39,7 @@ export default function DataTable() {
   const { students } = studentsContext;
   const filteredData = searchData(students, debouncedSearchValue);
 
-  const sortedData = sortObjects(filteredData, sortConfig);
+  const sortedData = sortObjectsArrayById(filteredData, sortConfig);
 
   const handleSort = (key: keyof Student) => {
     setSortConfig((prev) => {
