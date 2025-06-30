@@ -1,11 +1,9 @@
-import type { Student } from '../types/Student';
-
-export type SortConfigType = {
-  key: keyof Student;
+export type SortConfigType<T> = {
+  key: keyof T;
   direction: 'asc' | 'desc';
 };
 
-export function sortStudents<T extends Record<string, string | number>>(data: T[], sortConfig: SortConfigType): T[] {
+export function sortObjects<T>(data: T[], sortConfig: SortConfigType<T>): T[] {
   // sort mutes the data, so we give a shallow copy of data
   return [...data].sort((a, b) => {
     const aValue = a[sortConfig.key];
@@ -15,7 +13,7 @@ export function sortStudents<T extends Record<string, string | number>>(data: T[
       return sortConfig.direction === 'asc' ? aValue - bValue : bValue - aValue;
     }
 
-    const result = (aValue as string).localeCompare(bValue as string);
+    const result = String(aValue).localeCompare(String(bValue));
 
     return sortConfig.direction === 'asc' ? result : -result;
   });
