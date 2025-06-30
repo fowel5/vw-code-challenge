@@ -41,7 +41,7 @@ export default function DataTable() {
 
   const sortedData = sortStudents(filteredData, sortConfig);
 
-  function handleSort(key: keyof Student) {
+  const handleSort = (key: keyof Student) => {
     setSortConfig((prev) => {
       if (prev.key === key) {
         return { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' };
@@ -50,7 +50,7 @@ export default function DataTable() {
       // By default we will always sort in asc if new key
       return { key, direction: 'asc' };
     });
-  }
+  };
 
   return (
     <div className='max-w-auto'>
