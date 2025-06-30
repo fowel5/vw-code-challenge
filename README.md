@@ -16,7 +16,7 @@ This is a project for a code challenge for the company VW. It was scaffolded usi
 
 In order to run this project you will need `node >= 22.12.0` and `npm >= 6.14.16`. You just have to clone the project, go to the folder 'vw-code-challenge' and execute `npm i`. Then just `npm run dev`.
 
-If you want to execute the prod version of the application, you can do it with: `npm run start:prod` and visiting the page: http://localhost:8080/
+If you want to check the final version and run the productive code of it, you can do it with: `git checkout main`, then `npm run start:prod` and lastly visiting the page: http://localhost:8080/
 
 ## Branches
 
