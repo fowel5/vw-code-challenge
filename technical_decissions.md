@@ -28,7 +28,7 @@ I will explain here, from a technical point of view, why I chose specific techno
 
 ### Vite
 
-I used vite because it bundles really fast and has Hot-Module-Replacement, which enhances the Developer-Eyperience a lot.
+I used vite because it bundles really fast and has Hot-Module-Replacement, which enhances the Developer-Eyperience a lot. When the application becomes huge, you thank the fast bundle times, eventhough in this project it can be dismissed.
 
 ### Tailwind
 
