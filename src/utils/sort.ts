@@ -3,7 +3,7 @@ export type SortConfigType<T> = {
   direction: 'asc' | 'desc';
 };
 
-export function sortObjects<T>(data: T[], sortConfig: SortConfigType<T>): T[] {
+export function sortObjectsArrayById<T>(data: T[], sortConfig: SortConfigType<T>): T[] {
   // sort mutes the data, so we give a shallow copy of data
   return [...data].sort((a, b) => {
     const aValue = a[sortConfig.key];
