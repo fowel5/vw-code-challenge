@@ -15,11 +15,13 @@ This is a project for a code challenge for the company VW. It was scaffolded usi
 
 In order to run this project you will need `node >= 22.12.0` and `npm >= 6.14.16`. You just have to clone the project, go to the folder 'vw-code-challenge' and execute `npm i`. Then just `npm run dev`.
 
+If you want to execute the prod version of the application, you can do it with: `npm run start:prod`
+
 ## Branches
 
 I am using a GitFlow approach, where I have my develop branch named "dev" and from there, I create other branches to fullfil a task. After being done I create a pull-request, review it and merge it back into dev. As soon as I see a version worth showing, I will push the dev state into main.
 
-TODO: Create github action after push on main, which triggers a deployment on Github Pages.
+Would have been nice: Create github action after push on main, which triggers a deployment on Github Pages.
 
 Also I use conventional commits and conventional branches to have better structured namings.
 
