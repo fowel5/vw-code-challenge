@@ -26,6 +26,10 @@ I like to set different folders for different uses, and so did I.
 
 I will explain here, from a technical point of view, why I chose specific technologies (not all, but few of them)
 
+### Vite
+
+I used vite because it bundles really fast and has Hot-Module-Replacement, which enhances the Developer-Eyperience a lot.
+
 ### Tailwind
 
 As I said in the README, I am more used to CSSinJS libraries. The code looks much cleaner with libraries like styled-components or emotion. The problem is, that I do not like it in cliend-side react applications. Styled-components need a lot of execution time when the app grows, and without SSR, I can not render the styles in the server and inline it into the HTML (I do not like extra downloading a blocking module like css-files), which is my preffered variant. Another problem is, rendering a component and executing styled-components (and injecting the CSS dynamically), causes shifts. Shifts = Bad User Experience. So, I used Tailwind, which is a lightweight library for styling components and does not cause shifts. So, summarizing the paragraph, I traded performance for developer-experience by using Tailwind.
