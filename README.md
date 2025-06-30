@@ -1,5 +1,6 @@
 # Code Challenge
 
+This project was done by Miguel Angel Beltra Mayoral.
 This is a project for a code challenge for the company VW. It was scaffolded using `npm create vite@latest` and following best practices.
 
 ## Technologies

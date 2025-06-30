@@ -1,5 +1,6 @@
 # Project
 
+This project was done by Miguel Angel Beltra Mayoral.
 In this file I will list (hopefully) all the technical decisions such as how do I manage git, how do I create my DataTable, which Components can I reuse or why Wailwind?
 
 ## Git
