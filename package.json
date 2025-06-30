@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "e2e-test": "vite & npx json-server ./jsonserver/db.json & npx cypress run"
+    "e2e-test": "vite & npx json-server ./jsonserver/db.json & npx cypress run",
+    "start:prod": "tsc -b & vite build & npx json-server ./jsonserver/db.json & node ./server.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^0.0.0-insiders.aa85931",
