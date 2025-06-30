@@ -61,6 +61,10 @@ I decided here not to instantly search for the input value, but for using a debo
 
 For an scalable application I like to create a folder named "pages", which contains the pages that render the corresponding components. It would have added an extra layer of logic/complexity and I decided just to use a LayoutWrapper to set some global styles and directly render the component.
 
+### Student form
+
+I wanted to keep it as reusable as possible. Therefore, there was a problem, where by reloading the edit page, it did not render the form with the right content. This is like that, because the component rerenders itself, when the context is updated (so, when the students are fetched), but the form-state does not rerender, it keeps its original initial state, because react works like that. You can not base an initial state on the output of another hook and expect it to change its initial state. So, I added a useEffect as a safety-net where, whenever the students value is updated (it is studentToFind, but it also gets rerendered), the new state for the form is set and it shows as it should.
+
 ### Reusable Components
 
 #### StudentForm
