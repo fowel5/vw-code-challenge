@@ -97,3 +97,5 @@ The optimizations are in PRs, not merged in the final code.
 - CDN: I would place every asset in some CDN like Akamai or Cloudflare and set a TTL. With it the application would be delivered much faster.
 
 - Accessibility: It would have been nice to implement ARIA-Roles and navigation tab based navigation so everyone can use the app, but I am not into all this optimizations (I have my formation in 2 weeks).
+
+- Developer Experience: I would have outsourced the Tailwind classNames, that are being repeatedly used and outsourced it in a external file, so we can just use the name of the variable containing all the Tailwind directives and use it instead.
