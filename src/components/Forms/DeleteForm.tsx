@@ -22,7 +22,7 @@ export function DeleteForm({ studentToDelete, onClose }: { studentToDelete: Stud
         <button
           data-testid='finaldelete'
           type='button'
-          className='bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold shadow'
+          className='bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold shadow cursor-pointer'
           onClick={() => {
             deleteStudent(studentToDelete.id)
               .then(() => {
@@ -40,7 +40,7 @@ export function DeleteForm({ studentToDelete, onClose }: { studentToDelete: Stud
         >
           Delete
         </button>
-        <button type='button' className='bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg font-semibold shadow' onClick={onClose}>
+        <button type='button' className='bg-gray-300 hover:opacity-75 text-gray-800 px-4 py-2 rounded-lg font-semibold shadow cursor-pointer' onClick={onClose}>
           Cancel
         </button>
       </div>

@@ -23,6 +23,14 @@ export default function StudentShowCase() {
     return <div className='text-center text-gray-500'>Student not found</div>;
   }
 
+  const studentFields: Array<{ label: string; key: keyof typeof studentToShow; testid?: string; isMark?: boolean }> = [
+    { label: 'ID', key: 'id' },
+    { label: 'First Name', key: 'firstName', testid: 'firstName' },
+    { label: 'Last Name', key: 'lastName' },
+    { label: 'Email', key: 'email' },
+    { label: 'Mark', key: 'mark', isMark: true },
+  ];
+
   return (
     <div className='max-w-auto'>
       <Link to={'/'}>
@@ -50,33 +58,22 @@ export default function StudentShowCase() {
           <table className='min-w-full w-auto divide-y divide-gray-200'>
             <thead className='bg-[#00A5A8]'>
               <tr>
-                <th className='px-6 py-3 text-left text-sm font-medium text-gray-700'>Field</th>
-                <th className='px-6 py-3 text-left text-sm font-medium text-gray-700'>Value</th>
+                <th className='px-6 py-3 text-left text-sm font-medium text-white'>Field</th>
+                <th className='px-6 py-3 text-left text-sm font-medium text-white'>Value</th>
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-100'>
-              <tr>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>ID</td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>{studentToShow.id}</td>
-              </tr>
-              <tr>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>First Name</td>
-                <td data-testid='firstName' className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                  {studentToShow.firstName}
-                </td>
-              </tr>
-              <tr>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>Last Name</td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>{studentToShow.lastName}</td>
-              </tr>
-              <tr>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>Email</td>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>{studentToShow.email}</td>
-              </tr>
-              <tr>
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>Mark</td>
-                <td className={`px-6 py-4 whitespace-nowrap text-sm font-bold ${studentToShow.mark < 5 ? 'text-red-600' : 'text-green-600'}`}>{studentToShow.mark}</td>
-              </tr>
+              {studentFields.map((row) => (
+                <tr key={row.label}>
+                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold'>{row.label}</td>
+                  <td
+                    className={`px-6 py-4 whitespace-nowrap text-sm text-gray-900 ${row.isMark ? `font-bold ${Number(studentToShow[row.key]) < 5 ? 'text-red-600' : 'text-green-600'}` : ''}`}
+                    {...(row.testid ? { 'data-testid': row.testid } : {})}
+                  >
+                    {studentToShow[row.key]}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
